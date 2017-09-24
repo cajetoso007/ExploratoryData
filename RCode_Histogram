@@ -1,0 +1,13 @@
+library(data.table)
+
+setwd("C:/Users/Manuel/Desktop/Coursera")
+datafile<- ("./household_power_consumption/household_power_consumption.txt") #setting the path to the folder
+
+#Setting the files and directory to make the graphs
+plotData <- read.table(datafile, header=T, sep=";", na.strings="?")
+finalData <- plotData[plotData$Date %in% c("1/2/2007","2/2/2007"),]
+SetTime <-strptime(paste(finalData$Date, finalData$Time, sep=" "),"%d/%m/%Y %H:%M:%S")
+finalData <- cbind(SetTime, finalData)
+
+#Histogram . Xlab = name of x- label, main = Title of graph
+hist(finalData$Global_active_power, col = "green" ,ylab = "Frequency", xlab = "Global Active Power(kilowatts)", main = "Global Active Power") 

@@ -1,0 +1,15 @@
+library(data.table)
+
+setwd("C:/Users/Manuel/Desktop/Coursera")
+datafile<- ("./household_power_consumption/household_power_consumption.txt") #setting the path to the folder
+
+#Setting the files and directory to make the graphs
+plotData <- read.table(datafile, header=T, sep=";", na.strings="?")
+finalData <- plotData[plotData$Date %in% c("1/2/2007","2/2/2007"),]
+SetTime <-strptime(paste(finalData$Date, finalData$Time, sep=" "),"%d/%m/%Y %H:%M:%S")
+finalData <- cbind(SetTime, finalData)
+
+
+#Plot2
+plot(finalData$SetTime, finalData$Global_active_power, type="l", col="black", xlab="", ylab="Global Active Power (kilowatts)")
+#Labels were not showing up on my computer...
